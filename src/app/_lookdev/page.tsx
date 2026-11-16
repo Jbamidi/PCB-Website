@@ -8,7 +8,8 @@ import s from "./lookdev.module.css";
 
 export const metadata: Metadata = { title: "Look development", robots: { index: false, follow: false } };
 
-// Phase 0 look-development review. Replaced by the real homepage in Phase 1.
+// Phase 0 look-development review, kept for reference. The underscore folder keeps it out of the
+// site (Next.js does not route _folders); rename it back to lookdev to view it locally.
 
 type Part = { ref: string; populated: boolean };
 const parts = board.parts as Record<string, Part>;

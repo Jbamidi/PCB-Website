@@ -19,6 +19,8 @@ for (const entry of await readdir(images, { withFileTypes: true })) {
   }
 }
 for (const empty of ["data", "models"]) await rm(path.join(OUT, empty), { recursive: true, force: true });
+// full-size originals kept in public/images/source for re-exporting; no page uses them
+await rm(path.join(images, "source"), { recursive: true, force: true });
 
 let flattened = 0;
 async function flatten(segDir, prefix, parent) {

@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - id: pages
+        uses: actions/configure-pages@v5
+      - run: npm ci
+      - run: npm test
+      # A custom domain (public/CNAME) serves the site from the root, so no base path.
+      # Without one, fall back to what Pages reports ("/<repo>" for project sites).
+      - id: site
+        run: |
+          if [ -s public/CNAME ]; then
+            domain="$(tr -d '[:space:]' < public/CNAME)"
+            echo "base_path=" >> "$GITHUB_OUTPUT"
+            echo "url=https://${domain}" >> "$GITHUB_OUTPUT"
+          else
+            echo "base_path=${{ steps.pages.outputs.base_path }}" >> "$GITHUB_OUTPUT"
+            echo "url=${{ steps.pages.outputs.base_url }}" >> "$GITHUB_OUTPUT"
+          fi
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.site.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.site.outputs.url }}
+      # fail the deploy if any page still points at a prefixed asset path
+      - name: Check asset paths
+        run: |
+          if [ -s public/CNAME ] && grep -q 'href="/PCB-Website/' out/index.html; then
+            echo "out/index.html still uses a /PCB-Website base path"; exit 1
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
