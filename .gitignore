@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+# generated 3D and raw renders: regenerate with npm run board / board:glb / Blender
+board/portfolio.glb
+board/*-backups/
+board/fp-info-cache
+renders/
+*.blend1
+board/web/
+.snapshots/

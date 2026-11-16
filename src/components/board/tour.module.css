@@ -1,0 +1,51 @@
+/* the tour only exists with the live board; without it the full homepage shows instead */
+.tour { display: none; position: relative; z-index: 1; }
+:global(html[data-board-live]) .tour { display: block; }
+
+/* each stop is a screen and a half of scroll; the card stays put (sticky) while the camera holds */
+.stop { min-height: 150vh; position: relative; pointer-events: none; }
+.card {
+  position: sticky; top: calc(var(--header-h) + 12vh);
+  width: min(380px, 30vw);
+  margin-left: max(var(--s6), calc((100vw - var(--container)) / 2 + var(--pad) * 0.5));
+  pointer-events: auto;
+  background: var(--raised);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: var(--s5) var(--s5) var(--s4);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--silk) 6%, transparent) inset, 0 28px 60px -30px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 380ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card[data-side="right"] {
+  margin-left: auto;
+  margin-right: max(var(--s7), calc((100vw - var(--container)) / 2 + var(--pad)));
+  transform: translateX(28px);
+}
+.card[data-active] { opacity: 1; transform: none; }
+.card[data-side="left"] { border-left: 2px solid var(--signal); }
+.card[data-side="right"] { border-right: 2px solid var(--signal); }
+@media (prefers-reduced-motion: reduce) { .card { transform: none !important; } }
+
+.cardHead { display: flex; align-items: center; gap: var(--s3); margin: 0 0 var(--s3); font-size: var(--text-caption); color: var(--muted); max-width: none; }
+.cardHead :global(.ref) { font-size: 0.875rem; padding: 3px 7px; border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); border-radius: 2px; }
+.count { margin-left: auto; font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.08em; color: var(--muted); }
+.title { font-size: clamp(1.5rem, 2.1vw, 1.875rem); line-height: 1.12; margin-bottom: var(--s3); }
+.summary { font-size: var(--text-small); line-height: 1.55; color: var(--ink-soft); margin-bottom: var(--s3); }
+.media { margin: 0 0 var(--s3); padding: 6px; background: var(--ground); border: 1px solid var(--rule); border-radius: 4px; }
+.media img { width: 100%; height: auto; max-height: 180px; object-fit: contain; border-radius: 2px; }
+.outcomes { list-style: none; margin: 0 0 var(--s3); padding: 0; font-size: var(--text-caption); line-height: 1.45; }
+.outcomes li { padding: var(--s2) 0 var(--s2) var(--s4); border-top: 1px solid var(--rule); position: relative; }
+.outcomes li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--copper); }
+.kind { font-family: var(--serif); font-style: italic; color: var(--muted); white-space: nowrap; }
+.open { margin: 0; font: 500 0.75rem/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; }
+.open a { display: inline-block; padding: var(--s2) 0; text-decoration: none; }
+.open a:hover { text-decoration: underline; }
+.contact { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s1); font-size: var(--text-small); }
+.contact a { display: inline-block; padding: 4px 0; overflow-wrap: anywhere; }
+
+/* the leader from card to part */
+.leader { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 2; opacity: 0; transition: opacity 200ms linear; }
+.leader path { fill: none; stroke: var(--signal); stroke-width: 1.25; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--signal) 60%, transparent)); }
+.leader circle { fill: var(--ground); stroke: var(--signal); stroke-width: 2; }

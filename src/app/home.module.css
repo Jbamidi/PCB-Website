@@ -1,0 +1,219 @@
+/* ---------- hero: the board render bleeds to the edges and fades into the ground ---------- */
+.hero {
+  position: relative;
+  min-height: min(calc(100svh - var(--header-h)), 900px);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  margin-top: calc(-1 * var(--header-h));
+  padding-top: var(--header-h);
+}
+.heroImg { position: absolute; inset: 0; }
+.heroImg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.heroImg::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, transparent 55%, var(--ground) 98%),
+    linear-gradient(to right, var(--ground) 0%, color-mix(in srgb, var(--ground) 55%, transparent) 32%, transparent 58%);
+}
+/* the text column sits over the board's dark margin; only its own content takes the pointer */
+.heroText { position: relative; padding-top: var(--s9); padding-bottom: var(--s8); width: 100%; pointer-events: none; }
+.heroText > * { pointer-events: auto; width: fit-content; }
+.onBoard { padding-top: var(--s5); }
+.onBoardHead { margin-bottom: var(--s3); color: var(--copper); }
+.name {
+  font-family: var(--serif);
+  font-weight: 380;
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  max-width: 7ch;
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--ground) 70%, transparent);
+}
+.name span { display: block; }
+.line { font: 500 0.8125rem/1.3 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold); margin: var(--s5) 0 var(--s3); }
+
+/* before hydration the hero waits in the dark (on a first visit with the live board, until the
+   board has drawn); the failsafe shows it if scripts never run */
+.hero[data-po-pending] [data-po="board"] { filter: brightness(0.04) saturate(0.4); animation: po-failsafe 0.3s 5s forwards; }
+.hero[data-po-pending] [data-po="name"], .hero[data-po-pending] [data-po="rest"] { opacity: 0; animation: po-failsafe 0.3s 5s forwards; }
+@keyframes po-failsafe { to { opacity: 1; filter: none; } }
+
+@media (max-width: 900px) {
+  .hero { min-height: auto; align-items: start; }
+  .heroImg { position: relative; inset: auto; }
+  .heroImg img { height: auto; aspect-ratio: 4 / 3; object-position: 80% 50%; }
+  .heroImg::after { background: linear-gradient(to bottom, transparent 50%, var(--ground) 98%); }
+  .heroText { padding-top: 0; padding-bottom: var(--s6); margin-top: calc(-1 * var(--s7)); }
+}
+
+/* reference designator and status LED above each piece of work */
+.partTag { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4); margin: 0 0 var(--s3); font-size: var(--text-caption); color: var(--muted); }
+.partTag :global(.ref) { font-size: 0.8125rem; }
+
+.sectionLabel {
+  font-family: var(--serif);
+  font-size: 1.3125rem;
+  line-height: 1.3;
+  margin: 0;
+  padding-top: 0.15em;
+}
+.sectionLabel :global(.silk) { display: block; color: var(--copper); margin-bottom: var(--s2); }
+@media (max-width: 1023px) { .sectionLabel { margin-bottom: var(--s4); } }
+
+/* ---------- experience register ---------- */
+.register { padding-top: var(--s8); }
+.regList { list-style: none; margin: 0; padding: 0; }
+.regItem {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
+  column-gap: var(--s6);
+  padding: var(--s5) 0 var(--s5);
+  border-top: 1px solid var(--rule);
+}
+.regItem:first-child { border-top: 0; padding-top: 0; }
+.regOrg { font-size: 1.875rem; line-height: 1.15; }
+.regOrg a { color: var(--ink); text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent); }
+.regOrg a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.regRole { margin: var(--s2) 0 0; font-size: var(--text-small); }
+.regDates { margin: 2px 0 0; font-size: var(--text-small); color: var(--muted); font-variant-numeric: tabular-nums; }
+.regText { margin: 0; padding-top: 0.35em; }
+@media (max-width: 767px) {
+  .regItem { grid-template-columns: minmax(0, 1fr); row-gap: var(--s3); }
+  .regOrg { font-size: 1.625rem; }
+}
+
+/* ---------- hardware plate ---------- */
+.plateSection { padding-top: var(--s9); }
+.plateImage { margin-bottom: var(--s6); }
+.plateGrid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: var(--margin-col) minmax(0, 1fr);
+  grid-template-areas: "note fig";
+  column-gap: var(--gutter);
+}
+.plateNote { grid-area: note; font-size: var(--text-small); padding-top: var(--s7); }
+.plateNote p { margin-bottom: var(--s3); }
+.plateFig { grid-area: fig; min-width: 0; }
+.plateTitle { font-size: 1.3125rem; line-height: 1.3; margin-bottom: var(--s3); }
+@media (max-width: 1023px) {
+  .plateGrid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "note" "fig"; }
+  .plateNote { max-width: 40rem; margin-bottom: var(--s4); }
+}
+
+/* ---------- selected projects ---------- */
+.projectsHead { padding-top: var(--s9); }
+.featureTitle { font-size: 2.25rem; line-height: 1.1; margin-bottom: var(--s4); }
+.featureTitle a { color: var(--ink); text-decoration: none; }
+.featureTitle a:hover, .featureTitle a:focus-visible { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; }
+.discreet { font-size: var(--text-small); margin-top: var(--s4); }
+@media (max-width: 639px) { .featureTitle { font-size: 1.875rem; } }
+
+/* 1: planned board, narrow text column beside a wide architecture drawing */
+.board {
+  padding-top: var(--s4);
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  column-gap: var(--s8);
+  align-items: start;
+}
+.boardText { padding-top: var(--s2); }
+.boardText > p { font-size: 1.0625rem; }
+.status { font-size: var(--text-small); font-style: italic; font-family: var(--serif); color: var(--ink); margin: calc(-1 * var(--s2)) 0 var(--s4); }
+.questionsHead { font-size: var(--text-small); font-weight: 600; margin: var(--s5) 0 var(--s2); }
+.questions { margin: 0; padding: 0; list-style: none; font-size: var(--text-small); color: var(--ink-soft); }
+.questions li { padding: var(--s2) 0 var(--s2) var(--s4); border-left: 2px solid var(--accent); margin-bottom: var(--s2); }
+.boardFig { margin: 0; min-width: 0; }
+.boardImage { margin-bottom: var(--s5); }
+@media (max-width: 1023px) {
+  .board { grid-template-columns: minmax(0, 1fr); row-gap: var(--s6); }
+  .boardText { max-width: 40rem; }
+}
+
+/* 2: portrait */
+.vest {
+  padding-top: var(--s9);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: var(--s8);
+  align-items: start;
+}
+.vestPortrait { margin: 0; }
+.vestText { padding-top: var(--s7); max-width: 40rem; }
+.vestSummary { font-size: 1.0625rem; }
+.steps { list-style: none; margin: var(--s5) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4); font-size: var(--text-small); color: var(--ink-soft); }
+.steps li { border-top: 2px solid var(--accent); padding-top: var(--s3); }
+.steps li span { display: block; font-family: var(--serif); font-size: 1.25rem; color: var(--ink); margin-bottom: 2px; }
+@media (max-width: 639px) { .steps { grid-template-columns: minmax(0, 1fr); gap: var(--s3); } }
+@media (max-width: 1023px) {
+  .vest { grid-template-columns: minmax(0, 1fr); row-gap: var(--s6); }
+  .vestPortrait { max-width: 460px; }
+  .vestText { padding-top: 0; }
+}
+
+/* 3: technical spread */
+.tuner { padding-top: var(--s9); }
+.tunerText { max-width: 44rem; }
+.tunerFigure { margin: var(--s5) 0 0; }
+.benchNote {
+  font-size: var(--text-small);
+  color: var(--ink-soft);
+  align-self: end;
+  padding-bottom: var(--s8);
+}
+.benchHead { font-family: var(--serif); font-style: italic; font-size: 1.0625rem; color: var(--ink); margin-bottom: var(--s2); }
+@media (max-width: 1023px) {
+  .benchNote { order: 2; padding-bottom: 0; margin-top: var(--s5); border-left: 2px solid var(--accent-2); padding-left: var(--s4); }
+}
+
+/* ---------- index and colophon ---------- */
+.index { padding-top: var(--s9); }
+.colophon { padding-top: var(--s9); }
+.closing { font-family: var(--serif); font-size: 1.375rem; line-height: 1.5; max-width: 36em; }
+.contactList { margin: var(--s6) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s6); max-width: 44rem; }
+.contactList dt { font-size: var(--text-caption); color: var(--muted); }
+.contactList dd { margin: 0; overflow-wrap: anywhere; }
+/* each contact is a pin on the debug header: a gold pad that lights when you reach for it */
+.pin { position: relative; padding-left: 26px; }
+.pin::before {
+  content: ""; position: absolute; left: 0; top: 0.35em; width: 14px; height: 14px; border-radius: 2px;
+  background: radial-gradient(circle, var(--ground) 0 3px, var(--gold) 3.5px); transition: box-shadow 150ms;
+}
+.pin:first-child::before { border-radius: 2px; background: radial-gradient(circle, var(--ground) 0 3px, var(--gold) 3.5px); outline: 1px solid var(--gold); outline-offset: 2px; }
+.pin:hover::before, .pin:focus-within::before { box-shadow: 0 0 10px var(--signal); }
+.contactList a { display: inline-block; padding: 4px 0; }
+@media (max-width: 639px) {
+  .contactList { grid-template-columns: minmax(0, 1fr); }
+  .closing { font-size: 1.1875rem; }
+}
+@media (max-width: 1023px) { .vestText { order: -1; } }
+@media (max-width: 1023px) { .plateNote { padding-top: 0; } }
+
+/* ---------- with the live board (desktop): the board is the page ----------
+   The board is a fixed layer behind everything. The first screen is the whole board with
+   the name in a compact block above it; scrolling runs the tour (Tour.tsx), and the long
+   sections below give way to it (they stay on phones and with 3D off). */
+.scrollCue { display: none; }
+.full { display: block; }
+:global(html[data-board-live]) .full { display: none; }
+:global(html[data-board-live]) main > section { position: relative; z-index: 1; }
+:global(html[data-board-live]) :global(footer) { position: relative; z-index: 1; background: var(--ground); }
+:global(html[data-board-live]) .heroImg { display: none; }
+:global(html[data-board-live]) .hero { min-height: 100vh; align-items: stretch; pointer-events: none; }
+/* the name block: the name and one line, a compact band above the board */
+:global(html[data-board-live]) .heroText { padding-top: calc(var(--header-h) + var(--s6)); padding-bottom: 0; align-self: start; }
+:global(html[data-board-live]) .name { font-size: clamp(2.2rem, 3.4vw, 3.25rem); max-width: none; line-height: 1; text-shadow: none; }
+:global(html[data-board-live]) .name span { display: inline; }
+:global(html[data-board-live]) .line { margin: var(--s3) 0 0; }
+:global(html[data-board-live]) .scrollCue {
+  display: block; position: absolute; left: 50%; bottom: var(--s4); transform: translateX(-50%); margin: 0;
+  padding: var(--s2) var(--s4); border: 1px solid var(--rule); border-radius: 999px;
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+}
+:global(html[data-board-live]) .scrollCue :global(.silk) { color: var(--silk); }
+:global(html[data-board-live]) .scrollCue::after {
+  content: ""; display: block; width: 1px; height: 0; margin: 0 auto;
+}
+:global(html[data-board-live]) .onBoard { padding-top: var(--s8); padding-bottom: var(--s6); background: var(--ground); }

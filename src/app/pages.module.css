@@ -1,0 +1,102 @@
+.page { padding-top: var(--s7); }
+.head { margin-left: calc(var(--margin-col) + var(--gutter)); max-width: 52rem; }
+.kicker { color: var(--copper); margin-bottom: var(--s3); }
+.title { font-size: var(--text-title); font-variation-settings: "opsz" 60; letter-spacing: -0.02em; margin-bottom: var(--s4); }
+.lede { font-family: var(--serif); font-size: 1.375rem; line-height: 1.5; max-width: 36em; }
+.small { font-size: var(--text-small); color: var(--ink-soft); }
+.more { font-size: var(--text-small); margin-top: var(--s3); }
+.kind { font-family: var(--serif); font-style: italic; color: var(--muted); white-space: nowrap; }
+@media (max-width: 1023px) { .head { margin-left: 0; } }
+@media (max-width: 639px) { .lede { font-size: 1.1875rem; } }
+
+/* experience overview */
+.expList { list-style: none; margin: var(--s8) 0 0; padding: 0; }
+.expItem { padding: var(--s6) 0; border-top: 1px solid var(--rule); }
+.expWhen { font-size: var(--text-small); color: var(--muted); margin: 0; padding-top: 0.6em; display: grid; gap: var(--s1); align-content: start; }
+.expWhen p { margin: 0; }
+.expWhen :global(.ref) { font-size: 0.9375rem; }
+@media (max-width: 1023px) { .expWhen { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); padding-top: 0; margin-bottom: var(--s3); } }
+.expOrg { font-size: 2.25rem; }
+.expOrg a { color: var(--ink); text-decoration: none; }
+.expOrg a:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; }
+.expRole { font-size: var(--text-small); margin: var(--s2) 0 var(--s4); }
+.expBody { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s6); }
+.expOutcomes { margin: 0; padding: 0; list-style: none; font-size: var(--text-small); }
+.expOutcomes li { padding: var(--s2) 0 var(--s2) var(--s4); border-left: 2px solid var(--accent); margin-bottom: var(--s3); }
+@media (max-width: 767px) { .expBody { grid-template-columns: minmax(0, 1fr); gap: var(--s3); } .expOrg { font-size: 1.875rem; } }
+
+/* projects */
+.featured { margin: var(--s8) 0 0; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: var(--s7); align-items: end; }
+.featuredPair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+.featuredTitle { font-size: 2.25rem; margin-bottom: var(--s3); }
+.featuredTitle a { color: var(--ink); text-decoration: none; }
+.featuredTitle a:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; }
+.featuredText p { font-size: var(--text-small); }
+@media (max-width: 1023px) { .featured { grid-template-columns: minmax(0, 1fr); gap: var(--s5); } }
+
+
+/* about */
+.block { padding-top: var(--s8); }
+.blockTitle { font-size: 1.3125rem; line-height: 1.3; }
+@media (max-width: 1023px) { .blockTitle { margin-bottom: var(--s3); } .block { padding-top: var(--s7); } }
+.skills { margin: 0; }
+.skills > div { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: var(--s5); padding: var(--s4) 0; border-top: 1px solid var(--rule); }
+.skills dt { font-family: var(--serif); font-size: 1.25rem; }
+.skills dd { margin: 0; }
+.skills dd p { margin-bottom: var(--s2); }
+@media (max-width: 767px) { .skills > div { grid-template-columns: minmax(0, 1fr); gap: var(--s2); } }
+
+/* résumé */
+.resumeLinks { display: flex; flex-wrap: wrap; gap: var(--s6); font-size: var(--text-small); }
+.resumeLinks a { padding: var(--s2) 0; }
+.pdfFrame { margin-top: var(--s6); border: 1px solid var(--rule); background: var(--surface); }
+.pdfFrame object { display: block; width: 100%; height: min(1100px, 130vw); }
+.pdfFallback { padding: var(--s5); }
+@media (max-width: 767px) { .pdfFrame object { height: 70vh; } }
+.expSummary { max-width: 44rem; margin-bottom: 0; }
+
+/* 404: a trace that stops short of its pad, sparking across the gap */
+.noNet { display: block; width: min(520px, 100%); height: auto; margin: var(--s5) 0 var(--s6); overflow: visible; }
+.noNet path { fill: none; stroke: var(--copper); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.noNet circle { fill: var(--gold); }
+.spark path { stroke: var(--signal); stroke-width: 2; filter: drop-shadow(0 0 4px var(--signal)); opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .spark path { animation: spark 3.2s steps(1) infinite; }
+  @keyframes spark { 0%, 88% { opacity: 0; } 90%, 94% { opacity: 1; } 92%, 100% { opacity: 0; } }
+}
+
+/* projects: the live board from above, the BOM's assembly drawing */
+.boardMap { margin: var(--s7) 0 0; }
+.boardMapCanvas {
+  height: clamp(320px, 38vw, 560px);
+  border: 1px solid var(--rule); border-radius: 8px;
+  background: radial-gradient(110% 90% at 50% 45%, color-mix(in srgb, var(--mask) 26%, var(--raised)) 0%, var(--ground) 78%);
+}
+.boardMap figcaption { margin-top: var(--s2); text-align: right; }
+.boardMap:not(:has(.boardMapCanvas)) { display: none; }
+
+/* experience: a copper trace down the left edge, a connector pad per role, drawn in as you scroll */
+.expList { position: relative; }
+.expList::before, .expList::after { content: ""; position: absolute; left: 7px; top: 0; width: 2px; border-radius: 1px; pointer-events: none; }
+.expList::before { bottom: 0; background: var(--rule); }
+.expList::after {
+  height: var(--drawn, 0); background: var(--copper);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--copper) 55%, transparent);
+  transition: height 160ms linear;
+}
+.expItem { position: relative; padding-left: 40px; }
+/* the pad: a square connector land on the trace */
+.expItem::before {
+  content: ""; position: absolute; left: 0; top: calc(var(--s6) + 0.55em); width: 16px; height: 16px; border-radius: 2px;
+  background: var(--ground); border: 2px solid var(--rule);
+  transition: background-color 250ms, border-color 250ms, box-shadow 250ms;
+}
+/* the stub from the pad out to the role */
+.expItem::after {
+  content: ""; position: absolute; left: 16px; top: calc(var(--s6) + 0.55em + 7px); width: 18px; height: 2px;
+  background: var(--rule); transition: background-color 250ms;
+}
+.expItem[data-lit]::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px color-mix(in srgb, var(--gold) 60%, transparent); }
+.expItem[data-lit]::after { background: var(--copper); }
+.expItem[data-lit] .expWhen :global(.ref) { color: var(--gold); text-shadow: 0 0 8px color-mix(in srgb, var(--gold) 45%, transparent); }
+@media (prefers-reduced-motion: reduce) { .expList::after { height: 100%; } }

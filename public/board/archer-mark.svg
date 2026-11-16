@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 212" width="800" height="848">
+  <!-- Archer Aviation's mark, redrawn for the J1 jack: an arch whose flat top is a crossbar, over
+       three bars. Replace with the official artwork when available. -->
+  <g fill="#fff">
+    <!-- the arch, its top flattened into the crossbar -->
+    <path d="M20 206 V142 C20 84 46 36 70 8 H130 C154 36 180 84 180 142 V206 H163 V142 C163 92 141 52 120 24 H80 C59 52 37 92 37 142 V206 Z" />
+    <!-- outer pair of bars, cut on a slant toward the centre at the foot -->
+    <path d="M73 24 H85 V176 L73 188 Z" />
+    <path d="M127 24 H115 V176 L127 188 Z" />
+    <!-- the centre bar, ending in a point -->
+    <path d="M94 24 H106 V194 L100 204 L94 194 Z" />
+  </g>
+</svg>

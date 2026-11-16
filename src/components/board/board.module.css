@@ -1,0 +1,59 @@
+/* the live board is a fixed layer behind the whole homepage; sections scroll over it */
+.live { position: fixed; inset: 0; z-index: 0; opacity: 0; transition: opacity 600ms ease; }
+.live[data-ready] { opacity: 1; }
+.canvas { position: absolute !important; inset: 0; }
+
+/* hover label: a small silkscreen card beside the part */
+.label {
+  width: 240px;
+  transform: translate(12px, -8px);
+  background: color-mix(in srgb, var(--raised) 97%, transparent);
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--signal);
+  border-radius: 3px;
+  padding: 10px 12px 11px;
+  color: var(--silk);
+  font: 400 0.8125rem/1.45 var(--sans);
+  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.8);
+  animation: label-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.label[data-side="left"] { transform: translate(calc(-100% - 12px), -8px); border-left: 1px solid var(--rule); border-right: 2px solid var(--signal); }
+@keyframes label-in { from { opacity: 0; translate: 0 4px; } }
+.label p { margin: 0; max-width: none; }
+.labelRef { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--muted); margin-bottom: 4px !important; }
+.labelTitle { font-family: var(--serif); font-size: 1.125rem; line-height: 1.2; margin-bottom: 4px !important; }
+.labelLine { color: var(--ink-soft); }
+.labelOpen { margin-top: 8px !important; font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--signal); }
+
+/* 3D on/off */
+.toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  background: none; border: 1px solid var(--rule); border-radius: 2px;
+  min-height: 28px; padding: 5px 7px; cursor: pointer;
+}
+.toggle :global(.led) { gap: 6px; }
+.toggle :global(.led)::before { width: 7px; height: 7px; }
+.toggle:hover { color: var(--silk); border-color: color-mix(in srgb, var(--silk) 35%, var(--rule)); }
+.toggleState { color: var(--silk); }
+
+/* the part list: every part as a link, in reference-designator order */
+.parts {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 var(--s6);
+}
+.parts li { border-top: 1px solid var(--rule); }
+.parts a {
+  display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; align-items: center; gap: var(--s3);
+  min-height: 48px; padding: var(--s2) var(--s2) var(--s2) 0;
+  color: var(--silk); text-decoration: none; font-size: var(--text-small);
+  transition: background-color 150ms, color 150ms;
+}
+.parts a:hover, .parts li[data-active] a { background: linear-gradient(90deg, var(--wash), transparent 85%); color: var(--silk); }
+.parts li[data-active] :global(.ref) { color: var(--signal); }
+.partTitle { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* the board in a box on an inner page (case-study header, Projects map) */
+.view { position: relative; overflow: hidden; }
+.view > * { opacity: 0; transition: opacity 700ms ease; }
+.view[data-ready] > * { opacity: 1; }

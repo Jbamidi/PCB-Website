@@ -1,0 +1,43 @@
+{
+  "name": "jashwanth-portfolio-bringup",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "node scripts/optimize-images.mjs",
+    "build": "next build",
+    "postbuild": "node scripts/prune-export.mjs",
+    "start": "node scripts/serve-out.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "board": "call \"C:/Program Files/KiCad/10.0/bin/python.exe\" board/generate_board.py",
+    "board:glb": "call \"C:/Program Files/KiCad/10.0/bin/kicad-cli.exe\" pcb export glb -f -o board/portfolio.glb --subst-models --no-dnp --include-tracks --include-pads --include-zones --include-silkscreen --include-soldermask --user-origin 100x70mm board/portfolio.kicad_pcb",
+    "lookdev:web": "node scripts/lookdev-to-web.mjs",
+    "board:web": "call \"C:/Program Files/KiCad/10.0/bin/kicad-cli.exe\" pcb export glb -f -o board/web/parts-raw.glb --subst-models --no-dnp --user-origin 100x70mm board/portfolio.kicad_pcb && node scripts/export-layers.mjs && node scripts/bake-board.mjs && node scripts/build-web-board.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.9",
+    "@react-three/fiber": "9.8.2",
+    "gsap": "3.15.0",
+    "lenis": "1.3.27",
+    "next": "16.4.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "recharts": "3.10.1",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.187.0",
+    "meshoptimizer": "1.3.0",
+    "playwright-core": "1.64.1",
+    "sharp": "0.35.5",
+    "typescript": "5.9.3",
+    "vitest": "5.1.0"
+  }
+}

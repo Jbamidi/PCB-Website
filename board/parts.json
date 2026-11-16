@@ -1,0 +1,216 @@
+{
+  "board": {
+    "w": 160.0,
+    "h": 100.0
+  },
+  "parts": {
+    "usb-in": {
+      "ref": "J0",
+      "x": 17.0,
+      "y": 3.87,
+      "w": 9.64,
+      "h": 7.98,
+      "populated": true
+    },
+    "led-3v3": {
+      "ref": "D10",
+      "x": 34.6,
+      "y": 15.0,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-1v8": {
+      "ref": "D11",
+      "x": 49.6,
+      "y": 15.0,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-1v0": {
+      "ref": "D12",
+      "x": 64.6,
+      "y": 15.0,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-pwr": {
+      "ref": "D9",
+      "x": 23.6,
+      "y": 17.6,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "archer-aviation": {
+      "ref": "J1",
+      "x": 9.12,
+      "y": 40.56,
+      "w": 15.85,
+      "h": 18.56,
+      "populated": true
+    },
+    "eco-illini": {
+      "ref": "J2",
+      "x": 4.47,
+      "y": 60.25,
+      "w": 9.85,
+      "h": 15.5,
+      "populated": true
+    },
+    "spatial-audio-research": {
+      "ref": "J3",
+      "x": 7.2,
+      "y": 82.5,
+      "w": 14.1,
+      "h": 12.1,
+      "populated": true
+    },
+    "camera": {
+      "ref": "J21",
+      "x": 87.0,
+      "y": 2.38,
+      "w": 17.1,
+      "h": 7.05,
+      "populated": true
+    },
+    "fpga-edge-detection": {
+      "ref": "U2",
+      "x": 99.0,
+      "y": 31.0,
+      "w": 17.1,
+      "h": 17.1,
+      "populated": true
+    },
+    "cuda-attention-kernels": {
+      "ref": "U7",
+      "x": 52.99,
+      "y": 45.0,
+      "w": 23.11,
+      "h": 23.1,
+      "populated": true
+    },
+    "fpga-orderbook": {
+      "ref": "U5",
+      "x": 89.0,
+      "y": 59.0,
+      "w": 19.1,
+      "h": 19.1,
+      "populated": true
+    },
+    "high-speed-fpga-pcb": {
+      "ref": "U1",
+      "x": 121.0,
+      "y": 55.0,
+      "w": 15.1,
+      "h": 15.1,
+      "populated": false
+    },
+    "visionvest": {
+      "ref": "U3",
+      "x": 142.78,
+      "y": 24.0,
+      "w": 26.05,
+      "h": 19.0,
+      "populated": true
+    },
+    "risc-v-cpu": {
+      "ref": "U6",
+      "x": 120.0,
+      "y": 82.0,
+      "w": 16.95,
+      "h": 16.95,
+      "populated": true
+    },
+    "hardware-guitar-tuner": {
+      "ref": "U4",
+      "x": 40.0,
+      "y": 88.5,
+      "w": 6.9,
+      "h": 5.0,
+      "populated": true
+    },
+    "contact": {
+      "ref": "P1",
+      "x": 155.6,
+      "y": 46.0,
+      "w": 5.4,
+      "h": 8.45,
+      "populated": true
+    },
+    "spare-0": {
+      "ref": "U90",
+      "x": 146.0,
+      "y": 68.0,
+      "w": 7.75,
+      "h": 7.75,
+      "populated": false
+    },
+    "spare-1": {
+      "ref": "U91",
+      "x": 146.0,
+      "y": 81.0,
+      "w": 7.75,
+      "h": 7.75,
+      "populated": false
+    },
+    "led-u1": {
+      "ref": "D1",
+      "x": 130.2,
+      "y": 47.0,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-u2": {
+      "ref": "D2",
+      "x": 109.6,
+      "y": 21.0,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-u3": {
+      "ref": "D3",
+      "x": 128.6,
+      "y": 31.0,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-u4": {
+      "ref": "D4",
+      "x": 62.5,
+      "y": 84.6,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-u5": {
+      "ref": "D5",
+      "x": 100.4,
+      "y": 49.2,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-u6": {
+      "ref": "D6",
+      "x": 129.0,
+      "y": 89.6,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    },
+    "led-u7": {
+      "ref": "D7",
+      "x": 66.4,
+      "y": 33.4,
+      "w": 2.45,
+      "h": 0.95,
+      "populated": true
+    }
+  }
+}
